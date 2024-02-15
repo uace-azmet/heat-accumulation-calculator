@@ -10,13 +10,13 @@
 
 fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, timeStep) {
   if (heatVariable == "Heat Units 86-45 °F") {
-    heatVariableText <- "heat Units 86-45 °F"
+    heatVariableText <- "heat units 86-45 °F"
   } else if (heatVariable == "Heat Units 86-50 °F") {
-    heatVariableText <- "heat Units 86-50 °F"
+    heatVariableText <- "heat units 86-50 °F"
   } else if (heatVariable == "Heat Units 86-55 °F") {
-    heatVariableText <- "heat Units 86-55 °F"
+    heatVariableText <- "heat units 86-55 °F"
   } else if (heatVariable == "Heat Units 94-55 °F") {
-    heatVariableText <- "heat Units 94-55 °F"
+    heatVariableText <- "heat units 94-55 °F"
   }
   
   # Inputs
@@ -72,11 +72,11 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Chill accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Cumulative values for the Yuma North Gila station are unavailable in 2021 after June 15.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Cumulative values for the Yuma North Gila station are unavailable in 2021 after June 15.",  
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
-            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Chill Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
+            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
             br(), br(),
             "For information on how this webpage is put together, please visit the", " ", webpageCode, " ", "for this tool."
           )
@@ -87,11 +87,11 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Chill accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Wellton ETo station are unavailable prior to May 2, 2023.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Wellton ETo station are unavailable prior to May 2, 2023.",  
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
-            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Chill Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
+            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
             br(), br(),
             "For information on how this webpage is put together, please visit the", " ", webpageCode, " ", "for this tool."
           )
@@ -102,11 +102,11 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Chill accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Yuma Valley ETo station are unavailable prior to May 2, 2023.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Yuma Valley ETo station are unavailable prior to May 2, 2023.",  
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
-            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Chill Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
+            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
             br(), br(),
             "For information on how this webpage is put together, please visit the", " ", webpageCode, " ", "for this tool."
           )
@@ -117,11 +117,11 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Chill accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ",  
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
-            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Chill Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
+            "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/heat-accumulation-calculator. Accessed ", todayDate, "'.",
             br(), br(),
             "For information on how this webpage is put together, please visit the", " ", webpageCode, " ", "for this tool."
           )
