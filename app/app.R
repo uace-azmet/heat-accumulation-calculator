@@ -198,7 +198,7 @@ server <- function(input, output, session) {
   figureTitle <- eventReactive(input$calculateCumulativeValues, {
     validate(
       need(
-        expr = input$startDate <= input$endDate, 
+        expr = input$startDate <= input$endDate,
         message = "Please select a 'Start Date' that is earlier than or the same as the 'End Date'."
       ),
       errorClass = "datepicker"
