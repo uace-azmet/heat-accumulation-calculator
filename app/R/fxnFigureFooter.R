@@ -32,6 +32,12 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
     target="_blank"
   )
   
+  bulletinURL <- a(
+    "AZ1602 'Heat Units'",
+    href="https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1602.pdf",
+    target="_blank"
+  )
+  
   todayDate <- gsub(" 0", " ", format(lubridate::today(), "%B %d, %Y"))
   
   todayYear <- lubridate::year(lubridate::today())
@@ -72,7 +78,7 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Cumulative values for the Yuma North Gila station are unavailable in 2021 after June 15.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Cumulative values for the Yuma North Gila station are unavailable in 2021 after June 15.", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".",
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
@@ -87,7 +93,7 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Wellton ETo station are unavailable prior to May 2, 2023.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Wellton ETo station are unavailable prior to May 2, 2023.", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".",
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
@@ -102,7 +108,7 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Yuma Valley ETo station are unavailable prior to May 2, 2023.",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Yuma Valley ETo station are unavailable prior to May 2, 2023.", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".", 
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
@@ -117,7 +123,7 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ",  
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".",
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
