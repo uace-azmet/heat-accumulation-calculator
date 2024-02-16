@@ -73,12 +73,12 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
   )
   
   # Footer text
-  if (endDate > as.Date(paste0(lubridate::year(Sys.Date()), "-06-15")) & azmetStation == "Yuma North Gila") {
+  if (azmetStation == "Yuma North Gila") {
     figureFooter <- 
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Cumulative values for the Yuma North Gila station are unavailable in 2021 after June 15.", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".",
+            "Cumulative values are based on the sum of daily values of", " ", heatVariableText, " ", "for the current growing season (dark blue bar in graph) from", " ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " ", "through", " ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ".", " ", "Heat accumulation values for past seasons (gray bars in graph) are based on the same start and end month and day, but during those respective years", ".", " ", "Data for the Yuma North Gila station are unavailable in 2021 from June 16 through October 21.", " ", "More information on the calculation of heat units is in Extension bulletin", " ", bulletinURL, ".",
             br(), br(), 
             timeStep, " ", "AZMet data are from", " ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data", ".", " ", "More information about", " ", webpageDataVariables, ",", " ", webpageNetworkMap, ",", " ", "and", " ", webpageStationMetadata, " ", "is available on the", " ", webpageAZMet, ".", " ", "Users of AZMet data and data applications assume all risks of its use", ".",
             br(), br(),
