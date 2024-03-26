@@ -50,25 +50,25 @@ fxnFigureFooter <- function(azmetStation, heatVariable, startDate, endDate, time
   
   webpageDataVariables <- a(
     "data variables", 
-    href="https://staging.azmet.arizona.edu/about/data-variables", 
+    href="https://azmet.arizona.edu/about/data-variables", 
     target="_blank"
   )
   
   webpageNetworkMap <- a(
     "station locations", 
-    href="https://staging.azmet.arizona.edu/about/network-map", 
+    href="https://azmet.arizona.edu/about/network-map", 
     target="_blank"
   )
   
   webpageStationMetadata <- a(
     "station metadata", 
-    href="https://staging.azmet.arizona.edu/about/station-metadata", 
+    href="https://azmet.arizona.edu/about/station-metadata", 
     target="_blank"
   )
   
   webpageAZMet <- a(
     "AZMet website", 
-    href="https://staging.azmet.arizona.edu/", 
+    href="https://azmet.arizona.edu/", 
     target="_blank"
   )
   

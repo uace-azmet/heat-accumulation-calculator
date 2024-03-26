@@ -2,16 +2,6 @@
 
 # Calculate growing-season heat accumulation relative to cotton development
 
-# Add code for the following
-# 
-# 'azmet-shiny-template.html': <!-- Google tag (gtag.js) -->
-# 'azmet-shiny-template.html': <!-- CSS specific to this AZMet Shiny app -->
-
-# Edit the following [in square brackets]:
-# 
-# 'azmet-shiny-template.html': <article role="article" about="[/application-areas]" class="node node--type-az-flexible-page node--view-mode-full clearfix">
-
-
 # Libraries
 library(azmetr)
 library(dplyr)
