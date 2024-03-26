@@ -40,6 +40,8 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
     
     labs(x = "\nYear", y = paste0(heatVariable,"\n")) +
     
+    scale_y_continuous(expand = expansion(mult = c(0.01, 0.05))) +
+    
     theme_minimal() +
     
     theme( # https://ggplot2.tidyverse.org/reference/theme.html
