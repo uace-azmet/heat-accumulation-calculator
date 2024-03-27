@@ -148,4 +148,3 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
   
   return(figure)
 }
-
