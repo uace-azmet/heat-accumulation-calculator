@@ -1,14 +1,13 @@
 #' fxnFigure: generates bar chart of cumulative chill of current and recent years
 #' 
-#' @param inData - data table of seasonal chill accumulation values by year
 #' @param azmetStation - AZMet station selection by user
-#' @param heatVariable - Heat variable selection by user
+#' @param inData - data table of seasonal chill accumulation values by year
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest
 #' @return `figure` - png of figure
 
 
-fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
+fxnFigure <- function(azmetStation, inData, startDate, endDate) {
   figure <- ggplot2::ggplot(
     data = inData, 
     mapping = aes(x = as.factor(.data$dateYearLabel), y = .data$heatSum)
@@ -17,28 +16,28 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
     geom_col( # Previous growing season
       data = dplyr::filter(inData, inData$dateYearLabel < max(inData$dateYearLabel)), 
       mapping = aes(x = as.factor(.data$dateYearLabel), y = .data$heatSum), 
-      alpha = 1.0, fill = "#999999"
+      alpha = 1.0, fill = "#a2a2a2"
     ) +
     
     geom_col( # Current growing season
       data = dplyr::filter(inData, inData$dateYearLabel == max(inData$dateYearLabel)), 
       mapping = aes(x = as.factor(.data$dateYearLabel), y = .data$heatSum), 
-      alpha = 1.0, fill = "#001C48"
+      alpha = 1.0, fill = "#3b3b3b"
     ) +
     
     geom_label( # Previous growing season
       data = dplyr::filter(inData, inData$dateYearLabel < max(inData$dateYearLabel)), 
       mapping = aes(label = .data$heatSumLabel, fontface = "bold"), 
-      color = "#999999", fill = NA, label.size = NA, size = 3, vjust = 0.0
+      color = "#a2a2a2", fill = "#FFFFFF", label.size = NA, size = 3.5, vjust = -0.1
     ) +
     
     geom_label( # Current growing season
       data = dplyr::filter(inData, inData$dateYearLabel == max(inData$dateYearLabel)), 
       mapping = aes(label = .data$heatSumLabel, fontface = "bold"), 
-      color = "#001C48", fill = NA, label.size = NA, size = 3, vjust = 0.0
+      color = "#3b3b3b", fill = "#FFFFFF", label.size = NA, size = 3.5, vjust = -0.1
     ) + 
     
-    labs(x = "\nYear", y = paste0(heatVariable,"\n")) +
+    labs(x = "\nYear", y = "Degree Days\n") +
     
     scale_y_continuous(expand = expansion(mult = c(0.01, 0.05))) +
     
@@ -51,7 +50,7 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
       #title,
       #aspect.ratio,
       axis.title = element_text(
-        color = "#343a40", face = "plain", size = 10, hjust = 0.0, 
+        color = "#a2a2a2", face = "plain", size = 10, hjust = 0.0, 
         margin = margin(t = 0.2, r = 0, b = 0, l = 0, unit = "cm")
       ),
       #axis.title.x,
@@ -60,7 +59,7 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
       #axis.title.y,
       #axis.title.y.left,
       #axis.title.y.right,
-      axis.text = element_text(color = "#343a40", face = "plain", size = 10),
+      axis.text = element_text(color = "#a2a2a2", face = "plain", size = 10),
       #axis.text.x,
       #axis.text.x.top,
       #axis.text.x.bottom,
@@ -118,7 +117,7 @@ fxnFigure <- function(inData, azmetStation, heatVariable, startDate, endDate) {
       #panel.grid.major,
       panel.grid.minor = element_blank(),
       panel.grid.major.x = element_blank(),
-      panel.grid.major.y = element_line(color = "#CCCCCC", linetype = "solid", linewidth = 0.3),
+      panel.grid.major.y = element_line(color = "#a2a2a2", linetype = "solid", linewidth = 0.3),
       #panel.grid.minor.x,
       #panel.grid.minor.y,
       #panel.ontop,

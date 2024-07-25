@@ -22,7 +22,7 @@ fxnAZMetDataMerge <- function(azmetStation, heatVariable, startDate, endDate) {
       endDate <- min(seq(endDate, length = 2, by = "-1 year"))
     } else {
       # Heat accumulation calculation
-      dataAZMetDataSumHeat <- fxnAZMetDataSumHeat(
+      dataAZMetDataHeatSum <- fxnAZMetDataHeatSum(
         inData = dataAZMetDataELT,
         azmetStation = azmetStation, 
         heatVariable = heatVariable,
@@ -31,9 +31,9 @@ fxnAZMetDataMerge <- function(azmetStation, heatVariable, startDate, endDate) {
       )
       
       if (exists("dataAZMetDataMerge") == FALSE) {
-        dataAZMetDataMerge <- dataAZMetDataSumHeat
+        dataAZMetDataMerge <- dataAZMetDataHeatSum
       } else {
-        dataAZMetDataMerge <- rbind(dataAZMetDataMerge, dataAZMetDataSumHeat)
+        dataAZMetDataMerge <- rbind(dataAZMetDataMerge, dataAZMetDataHeatSum)
       }
       
       startDate <- min(seq(startDate, length = 2, by = "-1 year"))

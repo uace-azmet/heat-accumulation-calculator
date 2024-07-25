@@ -1,6 +1,4 @@
-
-
-# Calculate growing-season heat accumulation relative to cotton development
+# Calculate cumulative values of heat variables by station and date range
 
 # Libraries
 library(azmetr)
@@ -33,14 +31,14 @@ ui <- htmltools::htmlTemplate(
       
       verticalLayout(
         helpText(em(
-          "Select an AZMet station, specify the heat variable, and set dates for the start and end of the period of interest. Then, click or tap 'CALCULATE CUMULATIVE VALUES'."
+          "Select an AZMet station, specify the heat variable, and set dates for the start and end of the period of interest. Then, click or tap 'CALCULATE HEAT ACCUMULATION'."
         )),
         
         br(),
         selectInput(
           inputId = "azmetStation", 
           label = "AZMet Station",
-          choices = stationNames[order(stationNames$stationName), ]$stationName,
+          choices = azmetStations[order(azmetStations$stationName), ]$stationName,
           selected = "Aguila"
         ),
         
@@ -79,8 +77,8 @@ ui <- htmltools::htmlTemplate(
         
         br(),
         actionButton(
-          inputId = "calculateCumulativeValues", 
-          label = "CALCULATE CUMULATIVE VALUES",
+          inputId = "calculateHeatAccumulation", 
+          label = "CALCULATE HEAT ACCUMULATION",
           class = "btn btn-block btn-blue"
         )
       )
@@ -98,9 +96,15 @@ ui <- htmltools::htmlTemplate(
         column(width = 11, align = "left", offset = 1, htmlOutput(outputId = "figureSubtitle"))
       ),
       
+      br(),
       fluidRow(
         column(width = 11, align = "left", offset = 1, plotOutput(outputId = "figure"))
       ), 
+      
+      br(),
+      fluidRow(
+        column(width = 11, align = "left", offset = 1, htmlOutput(outputId = "figureSubtext"))
+      ),
       
       br(), br(),
       fluidRow(
@@ -123,23 +127,23 @@ server <- function(input, output, session) {
   # Reactive events -----
   
   # AZMet heat accumulation data
-  dataAZMetDataMerge <- eventReactive(input$calculateCumulativeValues, {
+  dataAZMetDataMerge <- eventReactive(input$calculateHeatAccumulation, {
     validate(
       need(expr = input$startDate <= input$endDate, message = FALSE)
     )
     
-    idCalculatingCumulativeValues <- showNotification(
-      ui = "Calculating cumulative values . . .", 
+    idCalculatingHeatAccumulation <- showNotification(
+      ui = "Calculating heat accumulation . . .", 
       action = NULL, 
       duration = NULL, 
       closeButton = FALSE,
-      id = "idCalculatingCumulativeValues",
+      id = "idCalculatingHeatAccumulation",
       type = "message"
     )
     
-    on.exit(removeNotification(id = idCalculatingCumulativeValues), add = TRUE)
+    on.exit(removeNotification(id = idCalculatingHeatAccumulation), add = TRUE)
     
-    # Calls 'fxnAZMetDataELT()' and 'fxnAZMetDataSumHeat()'
+    # Calls 'fxnAZMetDataELT()' and 'fxnAZMetDataHeatSum()'
     fxnAZMetDataMerge(
       azmetStation = input$azmetStation, 
       heatVariable = input$heatVariable,
@@ -151,9 +155,8 @@ server <- function(input, output, session) {
   # Build figure
   figure <- eventReactive(dataAZMetDataMerge(), {
     fxnFigure(
-      inData = dataAZMetDataMerge(), 
       azmetStation = input$azmetStation,
-      heatVariable = input$heatVariable,
+      inData = dataAZMetDataMerge(), 
       startDate = input$startDate, 
       endDate = input$endDate
     )
@@ -175,17 +178,27 @@ server <- function(input, output, session) {
     fxnFigureFooterHelpText()
   })
   
+  # Build figure subtext
+  figureSubtext <- eventReactive(dataAZMetDataMerge(), {
+    fxnFigureSubtext(
+      azmetStation = input$azmetStation,
+      startDate = input$startDate, 
+      endDate = input$endDate
+    )
+  })
+  
   # Build figure subtitle
   figureSubtitle <- eventReactive(dataAZMetDataMerge(), {
     fxnFigureSubtitle(
-      azmetStation = input$azmetStation, 
+      azmetStation = input$azmetStation,
+      inData = dataAZMetDataMerge(),
       startDate = input$startDate, 
       endDate = input$endDate
     )
   })
   
   # Build figure title
-  figureTitle <- eventReactive(input$calculateCumulativeValues, {
+  figureTitle <- eventReactive(input$calculateHeatAccumulation, {
     validate(
       need(
         expr = input$startDate <= input$endDate,
@@ -196,7 +209,6 @@ server <- function(input, output, session) {
     
     fxnFigureTitle(
       inData = dataAZMetDataMerge(), 
-      heatVariable = input$heatVariable,
       endDate = input$endDate
     )
   })
@@ -213,6 +225,10 @@ server <- function(input, output, session) {
   
   output$figureFooterHelpText <- renderUI({
     figureFooterHelpText()
+  })
+  
+  output$figureSubtext <- renderUI({
+    figureSubtext()
   })
   
   output$figureSubtitle <- renderUI({

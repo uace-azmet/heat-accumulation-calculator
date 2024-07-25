@@ -1,28 +1,61 @@
 #' `fxnFigureSubtitle.R` - Build subtitle for figure based on user input
 #' 
 #' @param azmetStation - AZMet station selection by user
+#' @param inData - data table of seasonal heat accumulation values by year
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest
 #' @return `figureSubtitle` - Subtitle for figure based on selected AZMet station
 
 
-fxnFigureSubtitle <- function(azmetStation, startDate, endDate) {
-  startMonth <- lubridate::month(startDate, label = TRUE, abbr = FALSE)
-  startDay <- lubridate::mday(startDate)
-  endMonth <- lubridate::month(endDate, label = TRUE, abbr = FALSE)
-  endDay <- lubridate::mday(endDate)
+fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate) {
+  currentYear <- lubridate::year(endDate)
+  previousYear <- currentYear - 1
   
-  figureSubtitle <- 
-    htmltools::p(
-      htmltools::HTML(
-        paste(
-          "at the AZMet", azmetStation, "station from", startMonth, startDay, "through", endMonth, endDay,
-          sep = " "
+  currentYearHeatSum <- dplyr::filter(inData, endDateYear == currentYear)$heatSum
+  previousYearHeatSum <- dplyr::filter(inData, endDateYear == previousYear)$heatSum
+  totalComparePreviousSum <- currentYearHeatSum - previousYearHeatSum
+  
+  previousYearText <- dplyr::filter(inData, endDateYear == previousYear)$dateYearLabel
+  
+  if (totalComparePreviousSum == 0) {
+    compareTextPrevious <- "the same as"
+  } else if (totalComparePreviousSum > 0) {
+    compareTextPrevious <- 
+      paste0(
+        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days greater than"
+      )
+  } else { # if (totalComparePreviousSum < 0)
+    compareTextPrevious <- 
+      paste0(
+        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days less than"
+      )
+  }
+  
+  # TODO: Add average information
+  # TODO: if() for != MOH, WEL, YUE
+  if (nrow(inData) == 1) {
+    figureSubtitle <- 
+      htmltools::p(
+        htmltools::HTML(
+          paste0(
+            "Heat accumulations at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days</b>."
+          ),
         ),
-      ),
-      
-      class = "figure-subtitle"
-    )
+        
+        class = "figure-subtitle"
+      )
+  } else {
+    figureSubtitle <- 
+      htmltools::p(
+        htmltools::HTML(
+          paste0(
+            "Heat accumulation at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days</b>. This is ", compareTextPrevious, " the total during this same month-day period in ", previousYearText, "."
+          ),
+        ),
+        
+        class = "figure-subtitle"
+      )
+  }
   
   return(figureSubtitle)
 }
