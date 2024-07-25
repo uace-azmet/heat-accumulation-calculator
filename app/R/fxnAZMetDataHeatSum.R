@@ -25,7 +25,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
     dataAZMetDataHeatSum <- data.frame(matrix(
       data = NA,
       nrow = 1, 
-      ncol = length(c("meta_station_name", "etTotal", "etTotalLabel", "endDateYear", "dateYearLabel"))
+      ncol = length(c("meta_station_name", "heatSum", "heatSumLabel", "endDateYear", "dateYearLabel"))
     ))
     
     colnames(dataAZMetDataHeatSum) <- 
@@ -33,7 +33,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
     
     dataAZMetDataHeatSum <- dataAZMetDataHeatSum %>%
       dplyr::mutate(meta_station_name = azmetStation) %>%
-      dplyr::mutate(heatSum = 0.00) %>%
+      dplyr::mutate(heatSum = 0.0) %>%
       dplyr::mutate(heatSumLabel = "NA") %>%
       dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
       dplyr::mutate(dateYearLabel = dateYear)
@@ -43,7 +43,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
         dplyr::group_by(meta_station_name) %>%
         dplyr::summarize(heat_units_45F_cumulative = sum(heat_units_45F, na.rm = TRUE)) %>%
         dplyr::rename(heatSum = heat_units_45F_cumulative) %>%
-        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 0), nsmall = 0)) %>%
+        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 1), nsmall = 1)) %>%
         dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
         dplyr::mutate(dateYearLabel = dateYear)
     } else if (heatVariable == "Heat Units 86-50 °F") {
@@ -51,7 +51,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
         dplyr::group_by(meta_station_name) %>%
         dplyr::summarize(heat_units_50F_cumulative = sum(heat_units_50F, na.rm = TRUE)) %>%
         dplyr::rename(heatSum = heat_units_50F_cumulative) %>%
-        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 0), nsmall = 0)) %>%
+        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 1), nsmall = 1)) %>%
         dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
         dplyr::mutate(dateYearLabel = dateYear)
     } else if (heatVariable == "Heat Units 86-55 °F") {
@@ -59,7 +59,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
         dplyr::group_by(meta_station_name) %>%
         dplyr::summarize(heat_units_55F_cumulative = sum(heat_units_55F, na.rm = TRUE)) %>%
         dplyr::rename(heatSum = heat_units_55F_cumulative) %>%
-        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 0), nsmall = 0)) %>%
+        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 1), nsmall = 1)) %>%
         dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
         dplyr::mutate(dateYearLabel = dateYear)
     } else if (heatVariable == "Heat Units 94-55 °F") {
@@ -67,7 +67,7 @@ fxnAZMetDataHeatSum <- function(inData, azmetStation, heatVariable, startDate, e
         dplyr::group_by(meta_station_name) %>%
         dplyr::summarize(heat_units_9455F_cumulative = sum(heat_units_9455F, na.rm = TRUE)) %>%
         dplyr::rename(heatSum = heat_units_9455F_cumulative) %>%
-        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 0), nsmall = 0)) %>%
+        dplyr::mutate(heatSumLabel = format(round(heatSum, digits = 1), nsmall = 1)) %>%
         dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
         dplyr::mutate(dateYearLabel = dateYear)
     }

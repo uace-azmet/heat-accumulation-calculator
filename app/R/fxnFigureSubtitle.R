@@ -22,12 +22,12 @@ fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate) {
   } else if (totalComparePreviousSum > 0) {
     compareTextPrevious <- 
       paste0(
-        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days greater than"
+        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days Fahrenheit greater than"
       )
   } else { # if (totalComparePreviousSum < 0)
     compareTextPrevious <- 
       paste0(
-        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days less than"
+        format(abs(round(totalComparePreviousSum, digits = 1)), nsmall = 1), " degree days Fahrenheit less than"
       )
   }
   
@@ -38,7 +38,7 @@ fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate) {
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Heat accumulations at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days</b>."
+            "Heat accumulations at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days Fahrenheit</b>."
           ),
         ),
         
@@ -49,7 +49,7 @@ fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate) {
       htmltools::p(
         htmltools::HTML(
           paste0(
-            "Heat accumulation at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days</b>. This is ", compareTextPrevious, " the total during this same month-day period in ", previousYearText, "."
+            "Heat accumulation at the AZMet ", azmetStation, " station from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), " is ", "<b>", format(round(currentYearHeatSum, digits = 1), nsmall = 1), " degree days Fahrenheit</b>. This is ", compareTextPrevious, " the total during this same month-day period in ", previousYearText, "."
           ),
         ),
         

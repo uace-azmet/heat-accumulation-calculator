@@ -13,7 +13,7 @@ fxnFigureTitle <- function(inData, endDate) {
     htmltools::h4(
       htmltools::HTML(
         paste0(
-          "<b>", heatSum, " degree days", "</b>"
+          "<b>", heatSum, " degree days Fahrenheit", "</b>"
         ),
       ),
       
