@@ -4,11 +4,10 @@
 #' @param inData - data table of seasonal heat accumulation values by year
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest
-#' @param heatVariable - Heat variable selection by user
 #' @return `figureSubtitle` - Subtitle for figure based on selected AZMet station
 
 
-fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate, heatVariable) {
+fxnFigureSubtitle <- function(azmetStation, inData, startDate, endDate) {
   currentYear <- lubridate::year(endDate)
   previousYear <- currentYear - 1
   

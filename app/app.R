@@ -193,8 +193,7 @@ server <- function(input, output, session) {
       azmetStation = input$azmetStation,
       inData = dataAZMetDataMerge(),
       startDate = input$startDate, 
-      endDate = input$endDate, 
-      heatVariable = input$heatVariable
+      endDate = input$endDate
     )
   })
   
