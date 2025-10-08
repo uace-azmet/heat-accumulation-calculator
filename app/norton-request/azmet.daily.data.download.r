@@ -30,7 +30,7 @@ azmet.daily.data.download <- function(stn_list, stn_name) {
   # variables and variable order of the latter period.
   
   # Set column name string for the 2003-present period. This list can be found 
-  # at http://ag.arizona.edu/azmet/raw2003.htm. Note that the soil temperature 
+  # at https://cales.arizona.edu/azmet/raw2003.htm. Note that the soil temperature 
   # depths change between the 1987-2002 and 2003-present periods. We use the 
   # depths from the latter to name these columns instead of generating new 
   # columns for the different depths between the two periods. As we do not 
@@ -40,7 +40,7 @@ azmet.daily.data.download <- function(stn_list, stn_name) {
   col_names <- c("Year", "JDay", "stn_no", "Tmax", "Tmin", "Tmean", "RHmax", 
                  "RHmin", "RHmean", "VPDmean", "SORADtot", "PRCtot", "4STmax",
                  "4STmin", "4STmean", "20STmax", "20STmin", "20STmean", 
-                 "WSmean", "WVmag", "WVdir", "Wdirstd", "WSmax", "HU8555",
+                 "WSmean", "WVmag", "WVdir", "Wdirstd", "WSmax", "HU3012.8C",
                  "ETref", "ETrefPM", "AVPmean", "DPTmean")
   
   # Set the string elements that together will build the full URL where 
