@@ -4,13 +4,14 @@
 
 # Setup ----------
 
+
 library(dplyr)
 
 source("./app/norton-request/azmet.daily.data.download.R", local = TRUE)
 
 stationList <- read.csv("./app/norton-request/azmet-station-list.csv", sep = ",")
 stationList <- stationList %>% 
-  dplyr::mutate(start_yr = 2024) %>% 
+  dplyr::mutate(start_yr = 2019) %>% 
   dplyr::mutate(end_yr = 2024)
 
 stationName <- "Willcox Bench"
@@ -43,6 +44,8 @@ stationData <- azmet.daily.data.download(stn_list = stationList, stn_name = stat
 # def calculateHeatUnits(self, strTempAirMax = "", strTempAirMin = "", strTempAirUpper = "", strTempAirLower = ""):
 fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold, lowerThreshold) {
 
+  #   dictReturn = {}
+  
   # aryFltSine = [	1.000,0.981,0.962,0.944,0.927,0.910,0.893,0.876,0.859,0.843,
   #                0.827,0.811,0.796,0.780,0.765,0.750,0.735,0.721,0.706,0.692,
   #                0.678,0.664,0.650,0.636,0.622,0.609,0.596,0.583,0.570,0.557,
@@ -65,6 +68,7 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
   #     and ((strTempAirUpper != "-7999") and (strTempAirUpper != "-6999") and (strTempAirUpper != "-9999.0"))
   #     and ((strTempAirLower != "-7999") and (strTempAirLower != "-6999") and (strTempAirLower != "-9999.0"))):
   if (tempAirMax != -7999 | tempAirMax != -6999 | tempAirMax != -9999.0 | tempAirMin != -7999 | tempAirMin != -6999 | tempAirMin != -9999.0) {
+    
     # fltTempAirMax = float(decimal.Decimal(strTempAirMax))
     # fltTempAirMin = float(decimal.Decimal(strTempAirMin))
     # fltTempAirUpper = float(decimal.Decimal(strTempAirUpper))
@@ -111,21 +115,21 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
     # 15060 IF X > TU GOTO 15200
     # if (fltTempAirMax > fltTempAirUpper):
     if (fltTempAirMax > fltTempAirUpper) {
+      
       # 15200 IF N < TL GOTO 15300
       # if (fltTempAirMin < fltTempAirLower):
       if (fltTempAirMin < fltTempAirLower) {
+        
         # 15300 R1 = CINT(((TL - N) / (X - N)) * 100)
         # fltSineWavePoint1 = ((fltTempAirLower - fltTempAirMin) / (fltTempAirMax - fltTempAirMin) * 100)
-        fltSineWavePoint1 <- (((fltTempAirLower - fltTempAirMin) / (fltTempAirMax - fltTempAirMin)) * 100)
-        
         # intSineWavePoint1 = self.roundValue(fltSineWavePoint1, "1", "int") # see line 44
+        fltSineWavePoint1 <- (((fltTempAirLower - fltTempAirMin) / (fltTempAirMax - fltTempAirMin)) * 100)
         intSineWavePoint1 <- round(fltSineWavePoint1, digits = 0)
         
         # 15320 R2 = CINT(((TU - N) / (X - N)) * 100)
         # fltSineWavePoint2 = ((fltTempAirUpper - fltTempAirMin) / (fltTempAirMax -fltTempAirMin) * 100)
-        fltSineWavePoint2 <- (((fltTempAirUpper - fltTempAirMin) / (fltTempAirMax - fltTempAirMin)) * 100)
-        
         # intSineWavePoint2 = self.roundValue(fltSineWavePoint2, "1", "int") # see line 44
+        fltSineWavePoint2 <- (((fltTempAirUpper - fltTempAirMin) / (fltTempAirMax - fltTempAirMin)) * 100)
         intSineWavePoint2 <- round(fltSineWavePoint2, digits = 0)
         
         # 15340 H = A * (SI(R1) - SI(R2)): RETURN
@@ -133,7 +137,9 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
         # fltHeatUnits =  fltTempAirAlpha * (aryFltSine[intSineWavePoint1] - aryFltSine[intSineWavePoint2])
         # + 1 to adjust from 0-based python index
         fltHeatUnits <- fltTempAirAlpha * (aryFltSine[intSineWavePoint1 + 1] - aryFltSine[intSineWavePoint2 + 1])
-      } else {
+        
+      } else { # if (fltTempAirMin >= fltTempAirLower)
+        
         # else:
         # 15220 R = CINT(((TU - N) / (X - N)) * 100)
         # fltSineWavePoint1 = ((fltTempAirUpper - fltTempAirMin) / (fltTempAirMax -fltTempAirMin) * 100)
@@ -142,9 +148,12 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
         # 15230 IF R < 0 THEN H = TU - TL: RETURN
         # if (fltSineWavePoint1 < 0.0):
         if (fltSineWavePoint1 < 0.0) {
+          
           # fltHeatUnits = fltTempAirUpper - fltTempAirLower
           fltHeatUnits <- fltTempAirUpper - fltTempAirLower
+          
         } else {
+          
           # else:
           # 15240 H = (TM - TL) - SI(R) * A: RETURN
           # intSineWavePoint1 = self.roundValue(fltSineWavePoint1, "1", "int")
@@ -155,12 +164,14 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
           #   fltHeatUnits = (fltTempAirMean - fltTempAirLower) - aryFltSine[intSineWavePoint1] * fltTempAirAlpha
           if (intSineWavePoint1 > 100) {
             intSineWavePoint1 <- 100
-            # + 1 to adjust from 0-based python index
-            fltHeatUnits <- (fltTempAirMean - fltTempAirLower) - aryFltSine[intSineWavePoint1 + 1] * fltTempAirAlpha
           }
+          
+          # + 1 to adjust from 0-based python index
+          fltHeatUnits <- (fltTempAirMean - fltTempAirLower) - aryFltSine[intSineWavePoint1 + 1] * fltTempAirAlpha
         } 
       }
     } else {
+      
       # else:
       # 15080 IF N > TL THEN H = TM - TL: RETURN
       # if (fltTempAirMin > fltTempAirLower):
@@ -168,6 +179,7 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
       if (fltTempAirMin > fltTempAirLower) {
         fltHeatUnits <- fltTempAirMean - fltTempAirLower
       } else {
+        
         # else:
         # 15100 R = CINT(((TL - N) / (X - N)) * 100)
         # fltSineWavePoint1 = ((fltTempAirLower - fltTempAirMin) / (fltTempAirMax - fltTempAirMin)) * 100
@@ -193,15 +205,19 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
         # fltHeatUnits = fltTempAirAlpha * aryFltSine[intSineWavePoint1]
         # + 1 to adjust from 0-based python index
         fltHeatUnits <- fltTempAirAlpha * aryFltSine[intSineWavePoint1 + 1]
+        
       }
     }
-    #   dictReturn = {}
+    
     # dictReturn = { "fltHeatUnits": fltHeatUnits, "decHeatUnits": ( self.roundValue(fltHeatUnits, "1.00", "dec") ) }
     fltHeatUnits <- round(fltHeatUnits, digits = 1)
+    
   } else {
+    
     # else:
     # dictReturn = { "fltHeatUnits": -9999.0, "decHeatUnits": -9999.0 }
     fltHeatUnits <- -9999.0
+    
   }
   
   # return dictReturn
@@ -215,15 +231,15 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
 # fltHUF = float(decHUCelsius) * 1.8
 # return fltHUF
 
-# fxn_convertHeatUnitCelsiusToHeatUnitFahrenheit <- function(fltHeatUnits_C) {
-#   if (fltHeatUnits_C == -9999.0) {
-#     fltHeatUnits_F <- -9999.0
-#   } else {
-#     fltHeatUnits_F <- round((fltHeatUnits_C * 1.8), digits = 1)
-#   }
-#   
-#   return(fltHeatUnits_F)
-# }
+fxn_convertHeatUnitCelsiusToHeatUnitFahrenheit <- function(fltHeatUnits_C) {
+  if (fltHeatUnits_C == -9999.0) {
+    fltHeatUnits_F <- -9999.0
+  } else {
+    fltHeatUnits_F <- round((fltHeatUnits_C * 1.8), digits = 1)
+  }
+
+  return(fltHeatUnits_F)
+}
 
 
 # Calculate heat units by user input ----------
@@ -234,26 +250,103 @@ fxn_calculateHeatUnitsCelsius <- function(tempAirMax, tempAirMin, upperTheshold,
 # self.dictObservationsDerived["obs_dyly_derived_heat_units_10C"] = dictHeatUnits["fltHeatUnits"]
 # self.dictObservationsDerived["obs_dyly_derived_heat_units_50F"] = self.convertHeatUnitCelsiusToHeatUnitFahrenheit(dictHeatUnits["fltHeatUnits"])
 
-# f2c: convert degrees Fahrenheit to degrees Celsius
-# @param: valueIn - variable with units of Fahrenheit
-# @return: valueOut - variable with units of Celsius
-# f2c <- function(valueIn) {
-#   valueOut <- (valueIn - 32) * (5/9)
-#   return(valueOut)
-# }
+
+# Test 1 -----
+
+
+upperThreshold <- 30.0
+lowerThreshold <- 12.7778
+i <- 180
+tempAirMax <- stationData$Tmax[i]
+tempAirMin <- stationData$Tmin[i]
+fxn_calculateHeatUnitsCelsius(tempAirMax, tempAirMin, upperThreshold, lowerThreshold)
+stationData$HU3012.8C[i]
+
+
+# Test 2 -----
+
 
 upperThreshold <- 30.0
 lowerThreshold <- 12.7778
 
-i <- 180
+wib <- stationData |>
+  dplyr::select(Year, JDay, Date, Month, Day, stn_no, Tmax, Tmin, HU3012.8C) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(
+    HU3012.8C_test = fxn_calculateHeatUnitsCelsius(
+      tempAirMax = Tmax, 
+      tempAirMin = Tmin, 
+      upperTheshold = upperThreshold,
+      lowerThreshold = lowerThreshold
+    )
+  )
 
-tempAirMax <- stationData$Tmax[i]
-tempAirMin <- stationData$Tmin[i]
+ggplot2::ggplot(data = wib, ggplot2::aes(x = HU3012.8C, y = HU3012.8C_test)) +
+  ggplot2::geom_point()
 
-fxn_calculateHeatUnitsCelsius(tempAirMax, tempAirMin, upperThreshold, lowerThreshold)
+ggplot2::ggplot(data = wib, ggplot2::aes(x = Tmax, y = HU3012.8C)) +
+  ggplot2::geom_point()
+ggplot2::ggplot(data = wib, ggplot2::aes(x = Tmax, y = HU3012.8C_test)) +
+  ggplot2::geom_point()
 
-stationData$HU3012.8C[i]
+ggplot2::ggplot(data = wib, ggplot2::aes(x = Tmin, y = HU3012.8C)) +
+  ggplot2::geom_point()
+ggplot2::ggplot(data = wib, ggplot2::aes(x = Tmin, y = HU3012.8C_test)) +
+  ggplot2::geom_point()
 
 
+# Output for Randy Norton -----
 
 
+upperThreshold <- 27.2
+lowerThreshold <- 4.44
+
+wib <- stationData |>
+  dplyr::mutate(meta_station_name = "Willcox Bench") |>
+  dplyr::rename(
+    datetime = Date,
+    date_doy = JDay,
+    date_year = Year,
+    meta_station_id = stn_no,
+    temp_air_maxC = Tmax,
+    temp_air_minC = Tmin
+  ) |>
+  dplyr::mutate(
+    meta_station_id = paste0("az", meta_station_id)
+  ) |>
+  dplyr::select(
+    datetime, 
+    date_doy, 
+    date_year, 
+    meta_station_id, 
+    meta_station_name, 
+    temp_air_maxC, 
+    temp_air_minC
+  ) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(
+    heat_units_27.2_4.44C = fxn_calculateHeatUnitsCelsius(
+      tempAirMax = temp_air_maxC, 
+      tempAirMin = temp_air_minC, 
+      upperTheshold = upperThreshold,
+      lowerThreshold = lowerThreshold
+    )
+  ) |>
+  dplyr::mutate(
+    heat_units_81.0_39.99F = fxn_convertHeatUnitCelsiusToHeatUnitFahrenheit(
+      heat_units_27.2_4.44C
+    )
+  )
+
+ggplot2::ggplot(
+  data = wib, 
+  ggplot2::aes(
+    x = date_doy, 
+    y = heat_units_27.2_4.44C, 
+    color = as.factor(date_year), 
+    group = date_year
+  )
+) +
+  ggplot2::geom_line()
+
+write.csv(wib, file = "azmet-wib-2019-2024-heat-units-norton.csv")
