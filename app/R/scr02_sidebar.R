@@ -18,7 +18,7 @@ sidebar <- bslib::sidebar(
     htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),
     bslib::tooltip(
       bsicons::bs_icon("info-circle"),
-      "Select an AZMet station, chill variable, and dates for the start and end of the period of interest. Then, click or tap 'CALCULATE TOTAL'.",
+      "Select an AZMet station, heat variable, and dates for the start and end of the period of interest. Then, click or tap 'CALCULATE TOTAL'.",
       id = "infoDataOptions",
       placement = "right"
     ),
@@ -34,10 +34,10 @@ sidebar <- bslib::sidebar(
   ),
   
   shiny::selectInput(
-    inputId = "chillVariable",
-    label = "Chill Variable",
-    choices = chillVariables,
-    selected = chillVariables[1]
+    inputId = "heatVariable",
+    label = "Heat Variable",
+    choices = heatVariables,
+    selected = heatVariables[1]
   ),
   
   shiny::dateInput(

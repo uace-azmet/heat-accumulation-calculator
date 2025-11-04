@@ -35,36 +35,35 @@ azmetStationMetadata <- azmetr::station_info |>
   ) |>
   dplyr::filter(!meta_station_name %in% c("Test"))
 
-chillVariables <- 
-  c(
-    "Hours below 32 °F", 
-    "Hours below 45 °F", 
-    "Hours above 68 °F"
+activeStations <-
+  dplyr::filter(
+    azmetStationMetadata,
+    status == "active"
   )
 
 # Derived (after data retrieved from station) variables
 dailyVarsDerived <- 
   c(
-    "chill_hours_0C",
-    "chill_hours_20C",
-    "chill_hours_32F",
-    "chill_hours_45F",
-    "chill_hours_68F",
-    "chill_hours_7C"#,
+    # "chill_hours_0C",
+    # "chill_hours_20C",
+    # "chill_hours_32F",
+    # "chill_hours_45F",
+    # "chill_hours_68F",
+    # "chill_hours_7C",
     # "dwpt_mean", 
     # "dwpt_meanF", 
     # "eto_azmet",
     # "eto_azmet_in", 
     # "eto_pen_mon", 
     # "eto_pen_mon_in", 
-    # "heat_units_10C", 
-    # "heat_units_13C", 
-    # "heat_units_3413C", 
-    # "heat_units_45F", 
-    # "heat_units_50F", 
-    # "heat_units_55F", 
-    # "heat_units_7C", 
-    # "heat_units_9455F", 
+    "heat_units_10C",
+    "heat_units_13C",
+    "heat_units_3413C",
+    "heat_units_45F",
+    "heat_units_50F",
+    "heat_units_55F",
+    "heat_units_7C",
+    "heat_units_9455F"#,
     # "heatstress_cotton_meanC", 
     # "heatstress_cotton_meanF", 
     # "precip_total_in", 
@@ -133,10 +132,12 @@ dailyVarsMeasured <-
     # "wind_vector_magnitude"
   )
 
-activeStations <-
-  dplyr::filter(
-    azmetStationMetadata,
-    status == "active"
+heatVariables <- 
+  c(
+    "Heat Units 94-55 °F",
+    "Heat Units 86-55 °F",
+    "Heat Units 86-50 °F", 
+    "Heat Units 86-45 °F"
   )
 
 if (Sys.Date() <= as.Date(paste0(lubridate::year(Sys.Date()), "-09-01"))) {

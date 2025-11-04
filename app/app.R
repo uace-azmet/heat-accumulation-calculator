@@ -142,7 +142,7 @@ server <- function(input, output, session) {
     )
 
     idCalculateTotal <- shiny::showNotification(
-      ui = "Calculating chill accumulation . . .",
+      ui = "Calculating heat accumulation . . .",
       action = NULL,
       duration = NULL,
       closeButton = FALSE,
