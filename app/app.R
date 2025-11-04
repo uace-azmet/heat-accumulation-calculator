@@ -110,7 +110,7 @@ server <- function(input, output, session) {
       azmetStation = input$azmetStation,
       startDate = input$startDate,
       endDate = input$endDate,
-      chillVariable = input$chillVariable
+      heatVariable = input$heatVariable
     )
   })
   
@@ -155,11 +155,11 @@ server <- function(input, output, session) {
       add = TRUE
     )
     
-    fxn_seasonalTotals( # calls `fxn_azDaily.R` and `fxn_chillTotal.R`
+    fxn_seasonalTotals( # calls `fxn_azDaily.R` and `fxn_heatTotal.R`
       azmetStation = input$azmetStation,
       startDate = input$startDate,
       endDate = input$endDate,
-      chillVariable = input$chillVariable
+      heatVariable = input$heatVariable
     )
   })
   

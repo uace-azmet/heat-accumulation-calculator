@@ -14,13 +14,13 @@ fxn_figureTitle <- function(azmetStation) {
           htmltools::HTML("&nbsp;"),
           toupper(
             paste0(
-              "Chill Accumulation at the AZMet ", azmetStation, " Station"
+              "Heat Accumulation at the AZMet ", azmetStation, " Station"
             )
           ),
           htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),
           bslib::tooltip(
             bsicons::bs_icon("info-circle"),
-            "Hover over bars for values of chill accumulation.",
+            "Hover over bars for values of heat accumulation.",
             id = "infoFigureTitle",
             placement = "right"
           )

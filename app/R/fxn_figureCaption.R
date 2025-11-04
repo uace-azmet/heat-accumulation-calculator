@@ -3,11 +3,11 @@
 #' @param azmetStation AZMet station selection by user
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest
-#' @param chillVariable - Chill variable selected by user
+#' @param heatVariable - Heat variable selected by user
 #' @return `figureCaption` Caption for figure based on selected station
 
 
-fxn_figureCaption <- function(azmetStation, startDate, endDate, chillVariable) {
+fxn_figureCaption <- function(azmetStation, startDate, endDate, heatVariable) {
   
   azmetStationStartDate <- 
     dplyr::filter(
@@ -15,17 +15,17 @@ fxn_figureCaption <- function(azmetStation, startDate, endDate, chillVariable) {
       meta_station_name == azmetStation
     )$start_date
   
-  if (chillVariable == "Hours below 32 °F") {
-    chillVariableText <- "hours below 32 °F"
-  } else if (chillVariable == "Hours below 45 °F") {
-    chillVariableText <- "hours below 45 °F"
-  } else if (chillVariable == "Hours above 68 °F") {
-    chillVariableText <- "hours above 68 °F"
+  if (heatVariable == "Hours below 32 °F") {
+    heatVariableText <- "hours below 32 °F"
+  } else if (heatVariable == "Hours below 45 °F") {
+    heatVariableText <- "hours below 45 °F"
+  } else if (heatVariable == "Hours above 68 °F") {
+    heatVariableText <- "hours above 68 °F"
   }
   
   standardText <- 
     paste0(
-      "Chill accumulation for the current year (black bar in graph) is based on the sum of daily totals of ", chillVariableText, " from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ". Accumulations for past years (gray bars in graph) are based on the same start and end month and day, but during those respective years. Average chill accumulation is calculated from values of all individual years shown above. Temperature data for the ", azmetStation, " station in the new AZMet database currently go back to ", 
+      "Chill accumulation for the current year (black bar in graph) is based on the sum of daily totals of ", heatVariableText, " from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ". Accumulations for past years (gray bars in graph) are based on the same start and end month and day, but during those respective years. Average chill accumulation is calculated from values of all individual years shown above. Temperature data for the ", azmetStation, " station in the new AZMet database currently go back to ", 
       gsub(" 0", " ", format(azmetStationStartDate, "%B %d, %Y")),
       "."
     )
