@@ -32,7 +32,7 @@ fxn_pageBottomText <- function() {
   
   webpageCode <- a(
     "GitHub page", 
-    href="https://github.com/uace-azmet/chill-accumulation-calculator", 
+    href="https://github.com/uace-azmet/heat-accumulation-calculator", 
     target="_blank"
   )
   
@@ -63,7 +63,7 @@ fxn_pageBottomText <- function() {
         paste0(
           "Daily AZMet data are from ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data. More information about ", webpageDataVariables, ", ", webpageNetworkMap, ", and ", webpageStationMetadata, " is available on the ", webpageAZMet, ". Users of AZMet data and related information assume all risks of its use.",
           htmltools::br(), htmltools::br(),
-          "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https:://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Chill Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/chill-accumulation-calculator. Accessed ", todayDate, "'.",
+          "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https:://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/heat-accumulation-calculator. Accessed ", todayDate, "'.",
           htmltools::br(), htmltools::br(),
           "For information on how this webpage is put together, please visit the ", webpageCode, " for this tool."
         )
