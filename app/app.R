@@ -1,4 +1,4 @@
-# Calculate cumulative values of chill variables by station and date range
+# Calculate cumulative values of heat variables by station and date range
 
 
 # UI --------------------
