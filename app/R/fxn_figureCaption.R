@@ -15,19 +15,19 @@ fxn_figureCaption <- function(azmetStation, startDate, endDate, heatVariable) {
       meta_station_name == azmetStation
     )$start_date
   
-  if (heatVariable == "Hours below 32 °F") {
-    heatVariableText <- "hours below 32 °F"
-  } else if (heatVariable == "Hours below 45 °F") {
-    heatVariableText <- "hours below 45 °F"
-  } else if (heatVariable == "Hours above 68 °F") {
-    heatVariableText <- "hours above 68 °F"
+  if (heatVariable == "Heat Units 94-55 °F") {
+    heatVariableText <- "heat units 94-55 °F"
+  } else if (heatVariable == "Heat Units 86-55 °F") {
+    heatVariableText <- "heat units 86-55 °F"
+  } else if (heatVariable == "Heat Units 86-50 °F") {
+    heatVariableText <- "heat units 86-50 °F"
+  } else if (heatVariable == "Heat Units 86-45 °F") {
+    heatVariableText <- "heat units 86-45 °F"
   }
   
   standardText <- 
     paste0(
-      "Chill accumulation for the current year (black bar in graph) is based on the sum of daily totals of ", heatVariableText, " from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ". Accumulations for past years (gray bars in graph) are based on the same start and end month and day, but during those respective years. Average chill accumulation is calculated from values of all individual years shown above. Temperature data for the ", azmetStation, " station in the new AZMet database currently go back to ", 
-      gsub(" 0", " ", format(azmetStationStartDate, "%B %d, %Y")),
-      "."
+      "Heat accumulation for the current year (black bar in graph) is based on the sum of daily totals of ", heatVariableText, " from ", gsub(" 0", " ", format(startDate, "%B %d, %Y")), " through ", gsub(" 0", " ", format(endDate, "%B %d, %Y")), ". Accumulations for past years (gray bars in graph) are based on the same start and end month and day, but during those respective years. Average heat accumulation is calculated from values of all individual years shown above. Temperature data for the ", azmetStation, " station in the new AZMet database currently go back to ", gsub(" 0", " ", format(azmetStationStartDate, "%B %d, %Y")), "."
     )
   
   # Account for multi-month absence of YUG data in 2021
@@ -59,7 +59,7 @@ fxn_figureCaption <- function(azmetStation, startDate, endDate, heatVariable) {
         htmltools::HTML(
           paste(
             standardText,
-            "However, we do not show chill accumulation for the year with a month-day period that overlaps the period from June 16, 2021 through October 10, 2021, when the ", azmetStation, " station was not in operation.",
+            "However, we do not show heat accumulation for the year with a month-day period that overlaps the period from June 16, 2021 through October 10, 2021, when the ", azmetStation, " station was not in operation.",
             sep = " "
           )
         ),

@@ -20,6 +20,12 @@ fxn_pageBottomText <- function() {
     target="_blank"
   )
   
+  bulletinURL <- a(
+    "AZ1602 'Heat Units'",
+    href="https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1602.pdf",
+    target="_blank"
+  )
+  
   todayDate <- gsub(" 0", " ", format(lubridate::today(), "%B %d, %Y"))
   
   todayYear <- lubridate::year(lubridate::today())
@@ -61,6 +67,8 @@ fxn_pageBottomText <- function() {
     htmltools::p(
       htmltools::HTML(
         paste0(
+          "More information on the calculation of heat units is in Extension bulletin ", bulletinURL, ".",
+          htmltools::br(), htmltools::br(),
           "Daily AZMet data are from ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data. More information about ", webpageDataVariables, ", ", webpageNetworkMap, ", and ", webpageStationMetadata, " is available on the ", webpageAZMet, ". Users of AZMet data and related information assume all risks of its use.",
           htmltools::br(), htmltools::br(),
           "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https:://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Heat Accumulation Calculator. https://viz.datascience.arizona.edu/azmet/heat-accumulation-calculator. Accessed ", todayDate, "'.",
