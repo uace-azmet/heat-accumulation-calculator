@@ -1,13 +1,13 @@
-#' `fxn_seasonalTotals` - Combines seasonal chill accumulation from individual years
+#' `fxn_seasonalTotals` - Combines seasonal heat accumulation from individual years
 #' 
 #' @param azmetStation - AZMet station selected by user
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest
-#' @param chillVariable - Chill variable selected by user
-#' @return `seasonalTotals` - Data table of seasonal chill accumulation from individual years
+#' @param heatVariable - Heat variable selected by user
+#' @return `seasonalTotals` - Data table of seasonal heat accumulation from individual years
 
 
-fxn_seasonalTotals <- function(azmetStation, startDate, endDate, chillVariable) {
+fxn_seasonalTotals <- function(azmetStation, startDate, endDate, heatVariable) {
   
   azmetStationStartDate <- 
     dplyr::filter(azmetStationMetadata, meta_station_name == azmetStation)$start_date
@@ -27,13 +27,13 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, chillVariable) 
       )
     
     # Calculate seasonal total from individual year and prepare data for graph
-    chillTotal <- 
-      fxn_chillTotal(
+    heatTotal <- 
+      fxn_heatTotal(
         inData = seasonalData,
         azmetStation = azmetStation, 
         startDate = startDate, 
         endDate = endDate,
-        chillVariable = chillVariable
+        heatVariable = heatVariable
       )
     
     # Account for multi-month absence of YUG data in 2021
@@ -47,15 +47,15 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, chillVariable) 
       userDateRange <- lubridate::interval(start = startDate, end = endDate)
 
       if (lubridate::int_overlaps(int1 = nodataDateRange, int2 = userDateRange) == TRUE) {
-        chillTotal$chillTotal <- 0
-        chillTotal$chillTotalLabel <- "NA"
+        heatTotal$heatTotal <- 0
+        heatTotal$heatTotalLabel <- "NA"
       }
     }
 
     if (exists("seasonalTotals") == FALSE) {
-      seasonalTotals <- chillTotal
+      seasonalTotals <- heatTotal
     } else {
-      seasonalTotals <- rbind(seasonalTotals, chillTotal)
+      seasonalTotals <- rbind(seasonalTotals, heatTotal)
     }
     
     startDate <- min(seq(lubridate::date(startDate), length = 2, by = "-1 year"))
@@ -65,7 +65,7 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, chillVariable) 
   # Account for multi-month absence of YUG data in 2021
   if (azmetStation == "Yuma N.Gila") {
     seasonalTotals <- seasonalTotals %>% 
-      dplyr::filter(chillTotalLabel != "NA")
+      dplyr::filter(heatTotalLabel != "NA")
   }
   
   return(seasonalTotals)
