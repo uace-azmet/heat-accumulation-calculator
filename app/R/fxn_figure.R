@@ -231,7 +231,7 @@ fxn_figure <- function(inData, azmetStation) {
           align = "left",
           font = 
             list(
-              color = "#3b3b3b",
+              color = "#808080", #"#3b3b3b",
               family = layoutFontFamily,
               size = 14
             ),
@@ -275,7 +275,7 @@ fxn_figure <- function(inData, azmetStation) {
             type = "line",
             layer = "above",
             line = list(
-              color = "#3b3b3b", 
+              color = "#808080", #"#3b3b3b", 
               dash = "solid",
               width = 1
             ),
