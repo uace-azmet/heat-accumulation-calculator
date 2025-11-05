@@ -140,11 +140,7 @@ heatVariables <-
     "Heat Units 86-45 °F"
   )
 
-if (Sys.Date() <= as.Date(paste0(lubridate::year(Sys.Date()), "-09-01"))) {
-  initialStartDate <- as.Date(paste0((lubridate::year(Sys.Date()) - 1), "-09-01"))
-} else {
-  initialStartDate <- as.Date(paste0(lubridate::year(Sys.Date()), "-09-01"))
-}
+initialStartDate <- Sys.Date() - lubridate::month(1)
 
 initialStation <-
   dplyr::filter(

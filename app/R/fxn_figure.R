@@ -1,6 +1,6 @@
-#' `fxn_figure` generates bar chart of chill accumulation of current and recent years
+#' `fxn_figure` generates bar chart of heat accumulation of current and recent years
 #' 
-#' @param inData - data table of seasonal chill accumulation values by year
+#' @param inData - data table of seasonal heat accumulation values by year
 #' @param azmetStation - user-specified AZMet station
 #' @return `figure` - plotly figure
 
@@ -15,7 +15,7 @@ fxn_figure <- function(inData, azmetStation) {
   
   # Inputs -----
   
-  averageTotal <- mean(inData$chillTotal, na.rm = TRUE)
+  averageTotal <- mean(inData$heatTotal, na.rm = TRUE)
   
   dataCurrentYear <- inData %>% 
     dplyr::filter(endDateYear == max(endDateYear)) %>%
@@ -39,7 +39,7 @@ fxn_figure <- function(inData, azmetStation) {
       plotly::plot_ly( # Bars for `dataOtherYears`
         data = dataOtherYears,
         x = ~endDateYear,
-        y = ~chillTotal,
+        y = ~heatTotal,
         marker = list(color = "#bfbfbf"),
         name = "other years",
         showlegend = FALSE,
@@ -47,7 +47,7 @@ fxn_figure <- function(inData, azmetStation) {
         hovertext = ~paste0(
           "<br><b>AZMet Station:</b> ", azmetStation,
           "<br><b>Year:</b> ", dateYearLabel,
-          "<br><b>Accumulation:</b> ", chillTotalLabel, " hours"
+          "<br><b>Accumulation:</b> ", heatTotalLabel, " DDF"
         ),
         type = "bar"
       ) %>% 
@@ -56,7 +56,7 @@ fxn_figure <- function(inData, azmetStation) {
         inherit = FALSE,
         data = dataCurrentYear,
         x = ~endDateYear,
-        y = ~chillTotal,
+        y = ~heatTotal,
         marker = list(color = "#191919"),
         name = "current year",
         showlegend = FALSE,
@@ -64,7 +64,7 @@ fxn_figure <- function(inData, azmetStation) {
         hovertext = ~paste0(
           "<br><b>AZMet Station:</b> ", azmetStation,
           "<br><b>Year:</b> ", dateYearLabel,
-          "<br><b>Accumulation:</b> ", chillTotalLabel, " hours"
+          "<br><b>Accumulation:</b> ", heatTotalLabel, " DDF"
         ),
         type = "bar"
       ) %>%
@@ -176,7 +176,7 @@ fxn_figure <- function(inData, azmetStation) {
       plotly::plot_ly( # Bars for `dataOtherYears`
         data = dataOtherYears,
         x = ~endDateYear,
-        y = ~chillTotal,
+        y = ~heatTotal,
         marker = list(color = "#bfbfbf"),
         name = "other years",
         showlegend = FALSE,
@@ -184,7 +184,7 @@ fxn_figure <- function(inData, azmetStation) {
         hovertext = ~paste0(
           "<br><b>AZMet Station:</b> ", azmetStation,
           "<br><b>Year:</b> ", dateYearLabel,
-          "<br><b>Accumulation:</b> ", chillTotalLabel, " hours"
+          "<br><b>Accumulation:</b> ", heatTotalLabel, " DDF"
         ),
         type = "bar"
       ) %>% 
@@ -193,7 +193,7 @@ fxn_figure <- function(inData, azmetStation) {
         inherit = FALSE,
         data = dataCurrentYear,
         x = ~endDateYear,
-        y = ~chillTotal,
+        y = ~heatTotal,
         marker = list(color = "#191919"),
         name = "current year",
         showlegend = FALSE,
@@ -201,7 +201,7 @@ fxn_figure <- function(inData, azmetStation) {
         hovertext = ~paste0(
           "<br><b>AZMet Station:</b> ", azmetStation,
           "<br><b>Year:</b> ", dateYearLabel,
-          "<br><b>Accumulation:</b> ", chillTotalLabel, " hours"
+          "<br><b>Accumulation:</b> ", heatTotalLabel, " DDF"
         ),
         type = "bar"
       ) %>%
@@ -219,7 +219,7 @@ fxn_figure <- function(inData, azmetStation) {
         scrollZoom = FALSE,
         toImageButtonOptions = list(
           format = "png", # Either png, svg, jpeg, or webp
-          filename = "AZMet-chill-accumulation-calculator",
+          filename = "AZMet-heat-accumulation-calculator",
           height = 400,
           width = 700,
           scale = 5
@@ -236,7 +236,7 @@ fxn_figure <- function(inData, azmetStation) {
               size = 14
             ),
           showarrow = FALSE,
-          text = paste("<b>Average: ", format(abs(round(averageTotal, digits = 2)), nsmall = 2), " hours</b>"),
+          text = paste("<b>Average: ", format(abs(round(averageTotal, digits = 2)), nsmall = 2), " DDF</b>"),
           x = 0,
           xanchor = "left",
           xref = "paper",
@@ -302,7 +302,7 @@ fxn_figure <- function(inData, azmetStation) {
           title = list(
             font = list(size = 14),
             standoff = 25,
-            text = "Hours"
+            text = "Degree Days Fahrenheit (DDF)"
           ),
           zeroline = TRUE,
           zerolinecolor = "#c9c9c9"
