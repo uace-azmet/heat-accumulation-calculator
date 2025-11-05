@@ -1,6 +1,6 @@
-#' `fxn_heatTotal` - calculates heat accumulation for an individual season
+#' `fxn_heatTotal` - Calculates heat accumulation for an individual season
 #' 
-#' @param inData - returned output from `fxn_dailyData.R`
+#' @param inData - Returned output from `fxn_dailyData.R`
 #' @param azmetStation - AZMet station selection by user
 #' @param startDate - Start date of period of interest
 #' @param endDate - End date of period of interest

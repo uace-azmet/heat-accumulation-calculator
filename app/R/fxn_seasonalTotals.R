@@ -47,7 +47,7 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, heatVariable) {
       userDateRange <- lubridate::interval(start = startDate, end = endDate)
 
       if (lubridate::int_overlaps(int1 = nodataDateRange, int2 = userDateRange) == TRUE) {
-        heatTotal$heatTotal <- 0
+        heatTotal$heatTotal <- 0.0
         heatTotal$heatTotalLabel <- "NA"
       }
     }

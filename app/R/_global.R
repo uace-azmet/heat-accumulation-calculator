@@ -140,7 +140,7 @@ heatVariables <-
     "Heat Units 86-45 °F"
   )
 
-initialStartDate <- Sys.Date() - lubridate::month(1)
+initialStartDate <- Sys.Date() - months(1)
 
 initialStation <-
   dplyr::filter(

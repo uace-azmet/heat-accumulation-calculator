@@ -1,7 +1,7 @@
-#' `fxn_figure` generates bar chart of heat accumulation of current and recent years
+#' `fxn_figure` Generates bar chart of heat accumulation of current and recent years
 #' 
-#' @param inData - data table of seasonal heat accumulation values by year
-#' @param azmetStation - user-specified AZMet station
+#' @param inData - Data table of seasonal heat accumulation values by year
+#' @param azmetStation - User-specified AZMet station
 #' @return `figure` - plotly figure
 
 # https://plotly-r.com/ 
@@ -82,7 +82,7 @@ fxn_figure <- function(inData, azmetStation) {
         scrollZoom = FALSE,
         toImageButtonOptions = list(
           format = "png", # Either png, svg, jpeg, or webp
-          filename = "AZMet-chill-accumulation-calculator",
+          filename = "AZMet-heat-accumulation-calculator",
           height = 400,
           width = 700,
           scale = 5
@@ -165,7 +165,7 @@ fxn_figure <- function(inData, azmetStation) {
           title = list(
             font = list(size = 14),
             standoff = 25,
-            text = "hours"
+            text = "Degree Days Fahrenheit (DDF)"
           ),
           zeroline = TRUE,
           zerolinecolor = "#c9c9c9"
@@ -236,7 +236,9 @@ fxn_figure <- function(inData, azmetStation) {
               size = 14
             ),
           showarrow = FALSE,
-          text = paste("<b>Average: ", format(abs(round(averageTotal, digits = 2)), nsmall = 2), " DDF</b>"),
+          text = paste(
+            "<b>Average: ", format(abs(round(averageTotal, digits = 1)), nsmall = 1), " DDF</b>"
+          ),
           x = 0,
           xanchor = "left",
           xref = "paper",
