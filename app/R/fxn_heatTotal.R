@@ -50,7 +50,7 @@ fxn_heatTotal <- function(inData, azmetStation, startDate, endDate, heatVariable
     } else if (heatVariable == "Heat Units 86-55 °F") {
       heatTotal <- inData %>%
         dplyr::group_by(meta_station_name) %>%
-        dplyr::summarize(cheat_units_55F_total = sum(heat_units_55F, na.rm = TRUE)) %>%
+        dplyr::summarize(heat_units_55F_total = sum(heat_units_55F, na.rm = TRUE)) %>%
         dplyr::rename(heatTotal = heat_units_55F_total) %>%
         dplyr::mutate(heatTotalLabel = format(round(heatTotal, digits = 1), nsmall = 1)) %>%
         dplyr::mutate(endDateYear = lubridate::year(endDate)) %>%
