@@ -9,15 +9,16 @@ fxn_figureTitle <- function(azmetStation) {
     htmltools::p(
       htmltools::HTML(
         paste0(
-          bsicons::bs_icon("graph-up"), 
-          htmltools::HTML("&nbsp;"),
-          htmltools::HTML("&nbsp;"),
+          bsicons::bs_icon("graph-up", class = "bolder-icon"), 
+          htmltools::HTML("&nbsp;&nbsp;"),
           toupper(
-            paste0(
-              "Heat Accumulation at the AZMet ", azmetStation, " Station"
+            htmltools::HTML(
+              paste0(
+                "<strong>Heat Accumulation at the AZMet ", azmetStation, " Station</strong>"
+              )
             )
           ),
-          htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),
+          htmltools::HTML("&nbsp;"),
           bslib::tooltip(
             bsicons::bs_icon("info-circle"),
             "Hover over bars for values of heat accumulation.",
