@@ -47,7 +47,7 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, heatVariable) {
       userDateRange <- lubridate::interval(start = startDate, end = endDate)
 
       if (lubridate::int_overlaps(int1 = nodataDateRange, int2 = userDateRange) == TRUE) {
-        heatTotal$heatTotal <- 0.0
+        heatTotal$heatTotal <- NA_real_
         heatTotal$heatTotalLabel <- "NA"
       }
     }
@@ -63,10 +63,10 @@ fxn_seasonalTotals <- function(azmetStation, startDate, endDate, heatVariable) {
   }
   
   # Account for multi-month absence of YUG data in 2021
-  if (azmetStation == "Yuma N.Gila") {
-    seasonalTotals <- seasonalTotals %>% 
-      dplyr::filter(heatTotalLabel != "NA")
-  }
+  # if (azmetStation == "Yuma N.Gila") {
+  #   seasonalTotals <- seasonalTotals %>% 
+  #     dplyr::filter(heatTotalLabel != "NA")
+  # }
   
   return(seasonalTotals)
 }
