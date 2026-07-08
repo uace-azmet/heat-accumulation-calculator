@@ -80,8 +80,12 @@ fxn_navsetCardBarChartCaption <-
           captionText,
           " Growing degree hours are based on calculations in the <a href=https://eikeluedeling.r-universe.dev/chillR>chillR</a> R package."
         )
-    } else {
-      captionText <- captionText
+    } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
+      captionText <- 
+        paste0(
+          captionText,
+          " More information on the calculation of heat units is in Extension bulletin ", bulletinURL, "."
+        )
     }
     
     # Format caption text as HTML

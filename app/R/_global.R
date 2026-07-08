@@ -216,6 +216,12 @@ hourlyVarsMeasured <-
 
 # Other -----
 
+bulletinURL <- a(
+  "AZ1602 'Heat Units'",
+  href="https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1602.pdf",
+  target="_blank"
+)
+
 heatVariables <- 
   c(
     "Growing Degree Hours",
