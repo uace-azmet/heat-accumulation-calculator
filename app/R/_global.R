@@ -219,10 +219,10 @@ hourlyVarsMeasured <-
 heatVariables <- 
   c(
     "Growing Degree Hours",
-    "Heat Units 94-55 °F",
+    "Heat Units 86-45 °F",
+    "Heat Units 86-50 °F",
     "Heat Units 86-55 °F",
-    "Heat Units 86-50 °F", 
-    "Heat Units 86-45 °F"
+    "Heat Units 94-55 °F"
   )
 
 navsetCardTabTitleIcon <- shiny::reactiveVal(value = "bar-chart-fill")
