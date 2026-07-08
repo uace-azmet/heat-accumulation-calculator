@@ -18,7 +18,7 @@ fxn_navsetCardBarChart <- function(inData, azmetStation, heatVariable) {
     round(mean(inData$heat_accumulation_seasonal, na.rm = TRUE), digits = 1)
   
   if (heatVariable == "Growing Degree Hours") {
-    axisVarUnits <- "Degree Hours Fahrenheit (DDH)"
+    axisVarUnits <- "Degree Hours Fahrenheit (DHF)"
     hoverTextVarUnits <- "DDH"
   } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
     axisVarUnits <- "Degree Days Fahrenheit (DDF)"

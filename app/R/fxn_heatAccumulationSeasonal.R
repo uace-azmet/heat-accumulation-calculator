@@ -57,25 +57,14 @@ fxn_heatAccumulationSeasonal <-
         dplyr::mutate(date_year_label = dateYearLabel)
       
     } else {
-      if (heatVariable == "Growing Degree Hours") {
-        heatAccumulationSeasonal <- inData %>%
-          dplyr::summarize(heat_accumulation_seasonal = sum(heat, na.rm = TRUE)) %>%
-          dplyr::mutate(
-            heat_accumulation_seasonal_label = 
-              format(round(heat_accumulation_seasonal, digits = 0), nsmall = 0)
-            ) %>%
-          dplyr::mutate(end_date_year = lubridate::year(endDate)) %>%
-          dplyr::mutate(date_year_label = dateYearLabel)
-      } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
-        heatAccumulationSeasonal <- inData %>%
-          dplyr::summarize(heat_accumulation_seasonal = sum(heat, na.rm = TRUE)) %>%
-          dplyr::mutate(
-            heat_accumulation_seasonal_label = 
-              format(round(heat_accumulation_seasonal, digits = 1), nsmall = 1)
-          ) %>%
-          dplyr::mutate(end_date_year = lubridate::year(endDate)) %>%
-          dplyr::mutate(date_year_label = dateYearLabel)
-      }
+      heatAccumulationSeasonal <- inData %>%
+        dplyr::summarize(heat_accumulation_seasonal = sum(heat, na.rm = TRUE)) %>%
+        dplyr::mutate(
+          heat_accumulation_seasonal_label = 
+            format(round(heat_accumulation_seasonal, digits = 1), nsmall = 1)
+        ) %>%
+        dplyr::mutate(end_date_year = lubridate::year(endDate)) %>%
+        dplyr::mutate(date_year_label = dateYearLabel)
     }
     
     if (azmetStation == "Yuma N.Gila" & lubridate::int_overlaps(int1 = yugNodataInterval, int2 = userDateRange) == TRUE) {

@@ -78,7 +78,7 @@ fxn_navsetCardBarChartCaption <-
       captionText <- 
         paste0(
           captionText,
-          " Growing degree hours are based on calculations in the <a href=https://eikeluedeling.r-universe.dev/heatR>heatR</a> R package."
+          " Growing degree hours are based on calculations in the <a href=https://eikeluedeling.r-universe.dev/chillR>chillR</a> R package."
         )
     } else {
       captionText <- captionText

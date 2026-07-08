@@ -20,13 +20,14 @@ fxn_heatAccumulation <- function(azmetStation, startDate, endDate, heatVariable)
   endDateDownload <- endDate
   
   while (startDateDownload >= azmetStationStartDate) {
-    if (heatVariable %in% c("Growing Degree Hours")) {
+    if (heatVariable == "Growing Degree Hours") {
       azHourly <-  
         fxn_azHourly(
           azmetStation = azmetStation,
           startDate = startDateDownload, # To call API by individual season
           endDate = endDateDownload
         )
+      
       azDaily <- azHourly %>% 
         fxn_hourlyHeatVarsToDaily(inData = ., azmetStation = azmetStation)
     } else { # heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F")
@@ -53,13 +54,6 @@ fxn_heatAccumulation <- function(azmetStation, startDate, endDate, heatVariable)
   
   
   # Data variable transform -----
-  
-  # if (heatVariable == "Hours between 32 and 45 °F") {
-  #   azDailySeasons <- azDailySeasons %>%
-  #     dplyr::mutate(heat_hours_3245F = heat_hours_45F - heat_hours_32F)
-  # } else {
-  #   azDailySeasons <- azDailySeasons
-  # }
   
   if (heatVariable == "Growing Degree Hours") {
     azDailySeasons <- azDailySeasons %>% 

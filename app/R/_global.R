@@ -218,6 +218,7 @@ hourlyVarsMeasured <-
 
 heatVariables <- 
   c(
+    "Growing Degree Hours",
     "Heat Units 94-55 °F",
     "Heat Units 86-55 °F",
     "Heat Units 86-50 °F", 

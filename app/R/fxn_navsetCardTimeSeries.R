@@ -27,8 +27,8 @@ fxn_navsetCardTimeSeries <- function(inData, startDate, endDate, heatVariable) {
     dplyr::filter(datetime >= startDate)
   
   if (heatVariable == "Growing Degree Hours") {
-    axisVarUnits <- "DDH"
-    hoverTextVarUnits <- "DDH"
+    axisVarUnits <- "DHF"
+    hoverTextVarUnits <- "DHF"
   } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
     axisVarUnits <- "DDF"
     hoverTextVarUnits <- "DDF"
