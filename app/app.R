@@ -264,53 +264,49 @@ server <- function(input, output, session) {
       fxn_downloadButtonsDiv()
     })
   
-  # output$downloadCSV <-
-  #   shiny::downloadHandler(
-  #     filename = function() {
-  #       if (input$heatVariable == "Chill Portions") {
-  #         heatVariableText <- "chill-portions"
-  #       } else if (input$heatVariable == "Hours below 32 °F") {
-  #         heatVariableText <- "hours-below-32F"
-  #       } else if (input$heatVariable == "Hours below 45 °F") {
-  #         heatVariableText <- "hours-below-45F"
-  #       } else if (input$heatVariable == "Hours between 32 and 45 °F") {
-  #         heatVariableText <- "hours-between-32-and-45F"
-  #       } else if (input$heatVariable == "Hours above 68 °F") {
-  #         heatVariableText <- "hours-above-68F"
-  #       } else if (input$heatVariable == "Utah Model") {
-  #         heatVariableText <- "utah-model-chill-units"
-  #       }
-  #       
-  #       paste0("AZMet-chill-accumulation-calculator-", heatVariableText, ".csv")
-  #     },
-  #     content = function(file) {
-  #       vroom::vroom_write(x = heatAccumulation()[[1]], file = file, delim = ",")
-  #     }
-  #   )
+  output$downloadCSV <-
+    shiny::downloadHandler(
+      filename = function() {
+        if (input$heatVariable == "Growing Degree Hours") {
+          heatVariableText <- "growing-degree-hours"
+        } else if (input$heatVariable == "Heat Units 94-55 °F") {
+          heatVariableText <- "heat-units-94-55F"
+        } else if (input$heatVariable == "Heat Units 86-55 °F") {
+          heatVariableText <- "heat-units-86-55F"
+        } else if (input$heatVariable == "Heat Units 86-50 °F") {
+          heatVariableText <- "heat-units-86-50F"
+        } else if (input$heatVariable == "Heat Units 86-45 °F") {
+          heatVariableText <- "heat-units-86-45F"
+        }
+
+        paste0("AZMet-heat-accumulation-calculator-", heatVariableText, ".csv")
+      },
+      content = function(file) {
+        vroom::vroom_write(x = heatAccumulation()[[1]], file = file, delim = ",")
+      }
+    )
   
-  # output$downloadTSV <-
-  #   shiny::downloadHandler(
-  #     filename = function() {
-  #       if (input$heatVariable == "Chill Portions") {
-  #         heatVariableText <- "chill-portions"
-  #       } else if (input$heatVariable == "Hours below 32 °F") {
-  #         heatVariableText <- "hours-below-32F"
-  #       } else if (input$heatVariable == "Hours below 45 °F") {
-  #         heatVariableText <- "hours-below-45F"
-  #       } else if (input$heatVariable == "Hours between 32 and 45 °F") {
-  #         heatVariableText <- "hours-between-32-and-45F"
-  #       } else if (input$heatVariable == "Hours above 68 °F") {
-  #         heatVariableText <- "hours-above-68F"
-  #       } else if (input$heatVariable == "Utah Model") {
-  #         heatVariableText <- "utah-model-chill-units"
-  #       }
-  #       
-  #       paste0("AZMet-chill-accumulation-calculator-", heatVariableText, ".tsv")
-  #     },
-  #     content = function(file) {
-  #       vroom::vroom_write(x = heatAccumulation()[[1]], file = file, delim = "\t")
-  #     }
-  #   )
+  output$downloadTSV <-
+    shiny::downloadHandler(
+      filename = function() {
+        if (input$heatVariable == "Growing Degree Hours") {
+          heatVariableText <- "growing-degree-hours"
+        } else if (input$heatVariable == "Heat Units 94-55 °F") {
+          heatVariableText <- "heat-units-94-55F"
+        } else if (input$heatVariable == "Heat Units 86-55 °F") {
+          heatVariableText <- "heat-units-86-55F"
+        } else if (input$heatVariable == "Heat Units 86-50 °F") {
+          heatVariableText <- "heat-units-86-50F"
+        } else if (input$heatVariable == "Heat Units 86-45 °F") {
+          heatVariableText <- "heat-units-86-45F"
+        }
+
+        paste0("AZMet-heat-accumulation-calculator-", heatVariableText, ".tsv")
+      },
+      content = function(file) {
+        vroom::vroom_write(x = heatAccumulation()[[1]], file = file, delim = "\t")
+      }
+    )
   
   output$navsetCardBarChart <-
     plotly::renderPlotly({
