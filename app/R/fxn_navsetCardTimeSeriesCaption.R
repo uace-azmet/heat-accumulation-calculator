@@ -27,9 +27,9 @@ fxn_navsetCardTimeSeriesCaption <- function(azmetStation, inData, startDate, end
   }
   
   if (heatVariable == "Growing Degree Hours") {
-    variableUnits <- "degree hours Fahrenheit"
+    variableUnits <- "degree hours Fahrenheit (DHF)"
   } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
-    variableUnits <- "degree days Farenheit"
+    variableUnits <- "degree days Farenheit (DDF)"
   }
   
   if (length(unique(inData$date_year_label)) == 1) {

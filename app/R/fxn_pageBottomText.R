@@ -19,6 +19,12 @@ fxn_pageBottomText <- function() {
       target="_blank"
     )
   
+  bulletinURL <- a(
+    "AZ1602 'Heat Units'",
+    href="https://extension.arizona.edu/sites/extension.arizona.edu/files/pubs/az1602.pdf",
+    target="_blank"
+  )
+  
   todayDate <- gsub(" 0", " ", format(lubridate::today(), "%B %d, %Y"))
   
   todayYear <- lubridate::year(lubridate::today())

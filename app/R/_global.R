@@ -115,7 +115,7 @@ dailyVarsID <-
     "datetime", 
     # "meta_needs_review", 
     # "meta_station_id", 
-    "meta_station_name", 
+    "meta_station_name"#, 
     # "meta_version"
   )
 

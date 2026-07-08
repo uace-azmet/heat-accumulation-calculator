@@ -19,9 +19,9 @@ fxn_navsetCardTableCaption <- function(heatVariable) {
   }
   
   if (heatVariable == "Growing Degree Hours") {
-    variableUnits <- "degree hours Fahrenheit"
+    variableUnits <- "degree hours Fahrenheit (DHF)"
   } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
-    variableUnits <- "degree days Farenheit"
+    variableUnits <- "degree days Farenheit (DDF)"
   }
   
   captionText <- "Values of 'NA' denote no data."
@@ -30,7 +30,7 @@ fxn_navsetCardTableCaption <- function(heatVariable) {
   if (heatVariable == "Growing Degree Hours") {
     captionText <- 
       paste0(
-        captionText, " Growing degree hours are based on calculations in the <a href=https://eikeluedeling.r-universe.dev/heatR>heatR</a> R package."
+        captionText, " Growing degree hours are based on calculations in the <a href=https://eikeluedeling.r-universe.dev/chillR>chillR</a> R package."
       )
   } else {
     captionText <- captionText
@@ -38,7 +38,7 @@ fxn_navsetCardTableCaption <- function(heatVariable) {
   
   variableKeyText <- 
     paste0(
-      "Variable key: <strong>Day<sub>period</sub></strong> day number of the period of interest; <strong>Chill</strong> daily heat values in ", variableUnits, " as represented by ", heatVariableText, "; <strong>Chill<sub>cumulative</sub></strong> accumulation of daily heat values in ", variableUnits, " during the period of interest as represented by ", heatVariableText
+      "Variable key: <strong>Day<sub>period</sub></strong> day number of the period of interest; <strong>Heat</strong> daily heat values in ", variableUnits, " as represented by ", heatVariableText, "; <strong>Heat<sub>cumulative</sub></strong> accumulation of daily heat values in ", variableUnits, " during the period of interest as represented by ", heatVariableText
     )
   
   # Format caption text as HTML

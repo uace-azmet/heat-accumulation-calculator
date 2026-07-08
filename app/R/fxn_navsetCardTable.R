@@ -26,9 +26,9 @@ fxn_navsetCardTable <- function(inData, startDate, endDate, heatVariable) {
     )
   
   if (heatVariable == "Growing Degree Hours") {
-    variableUnits <- "degree hours Fahrenheit"
+    variableUnits <- "DHF"
   } else { #if (heatVariable %in% c("Heat Units 94-55 °F", "Heat Units 86-55 °F", "Heat Units 86-50 °F", "Heat Units 86-45 °F"))
-    variableUnits <- "degree days Farenheit"
+    variableUnits <- "DDF"
   }
   
   
