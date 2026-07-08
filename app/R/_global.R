@@ -4,11 +4,15 @@
 library(azmetr)
 library(bsicons)
 library(bslib)
+library(chillR)
 library(dplyr)
 library(htmltools)
 library(lubridate)
 library(plotly)
+library(reactable)
 library(shiny)
+library(shinyjs)
+library(vroom)
 
 
 # Files --------------------
@@ -20,9 +24,13 @@ library(shiny)
 # Scripts. Loaded automatically at app start if in `R` folder
 #source("./R/scr_scriptName.R", local = TRUE)
 
+shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+
 
 # Variables --------------------
 
+
+# AZMet Stations -----
 
 azmetStationMetadata <- azmetr::station_info |>
   dplyr::mutate(end_date = NA) |> # Placeholder until inactive stations are in API and `azmetr`
@@ -35,11 +43,25 @@ azmetStationMetadata <- azmetr::station_info |>
   ) |>
   dplyr::filter(!meta_station_name %in% c("Test"))
 
-activeStations <-
-  dplyr::filter(
-    azmetStationMetadata,
-    status == "active"
-  )
+activeStations <- dplyr::filter(azmetStationMetadata, status == "active")
+
+initialStation <- activeStations |>
+  dplyr::arrange(meta_station_name) |>
+  dplyr::pull(meta_station_name) |>
+  dplyr::first()
+
+initialStartDate <- Sys.Date() - months(1)
+
+initialStartDateMinimum <- 
+  dplyr::filter(activeStations, meta_station_name == initialStation) |>
+  dplyr::pull(start_date)
+
+yugNodataStartDate <- lubridate::date("2021-06-16")
+yugNodataEndDate <- lubridate::date("2021-10-21")
+yugNodataInterval <- lubridate::interval(yugNodataStartDate, yugNodataEndDate)
+
+
+# Daily Data -----
 
 # Derived (after data retrieved from station) variables
 dailyVarsDerived <- 
@@ -88,13 +110,13 @@ dailyVarsDerived <-
 # Identification and date variables
 dailyVarsID <- 
   c(
-    "date_doy", 
-    "date_year", 
+    # "date_doy", 
+    # "date_year", 
     "datetime", 
-    "meta_needs_review", 
-    "meta_station_id", 
-    "meta_station_name", 
-    "meta_version"
+    # "meta_needs_review", 
+    # "meta_station_id", 
+    "meta_station_name"#, 
+    # "meta_version"
   )
 
 # Measured (or dervied at station datalogger) variables
@@ -132,26 +154,78 @@ dailyVarsMeasured <-
     # "wind_vector_magnitude"
   )
 
+# Hourly Data -----
+
+# Derived (after data retrievd from station) variables
+hourlyVarsDerived <- 
+  c(
+    # "dwpt", 
+    # "dwptF", 
+    # "eto_azmet", 
+    # "eto_azmet_in", 
+    # "heatstress_cottonC", 
+    # "heatstress_cottonF", 
+    # "precip_total_in", 
+    # "sol_rad_total_ly",
+    # "temp_airF", 
+    # "temp_soil_10cmF", 
+    # "temp_soil_50cmF", 
+    # "wind_2min_spd_max_mph", 
+    # "wind_2min_spd_mean_mph", 
+    # "wind_spd_max_mph", 
+    # "wind_spd_mph", 
+    # "wind_vector_magnitude_mph"
+  )
+
+# Identification and date variables
+hourlyVarsID <- 
+  c(
+    "date_datetime",
+    "date_doy",
+    "date_hour",
+    "date_year"#, 
+    # "meta_needs_review", 
+    # "meta_station_id", 
+    # "meta_station_name", 
+    # "meta_version"
+  )
+
+# Measured (or derived at station datalogger) variables
+hourlyVarsMeasured <- 
+  c(
+    # "meta_bat_volt", 
+    # "precip_total", 
+    # "relative_humidity", 
+    # "sol_rad_total", 
+    "temp_airC"#, 
+    # "temp_soil_10cmC", 
+    # "temp_soil_50cmC", 
+    # "vp_actual", 
+    # "vp_deficit", 
+    # "wind_2min_spd_max_mps", 
+    # "wind_2min_spd_mean_mps", 
+    # "wind_2min_timestamp", 
+    # "wind_2min_vector_dir", 
+    # "wind_spd_max_mps", 
+    # "wind_spd_mps", 
+    # "wind_vector_dir", 
+    # "wind_vector_dir_stand_dev", 
+    # "wind_vector_magnitude"
+  )
+
+
+# Other -----
+
 heatVariables <- 
   c(
+    "Growing Degree Hours",
     "Heat Units 94-55 °F",
     "Heat Units 86-55 °F",
     "Heat Units 86-50 °F", 
     "Heat Units 86-45 °F"
   )
 
-initialStartDate <- Sys.Date() - months(1)
+navsetCardTabTitleIcon <- shiny::reactiveVal(value = "bar-chart-fill")
 
-initialStation <-
-  dplyr::filter(
-    activeStations,
-    meta_station_name == azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]
-  )$meta_station_name
-
-initialStationStartDate <- dplyr::filter(activeStations, meta_station_name == initialStation)$start_date
-
-if (initialStationStartDate > Sys.Date() - lubridate::years(1)) {
-  initialStartDateMinimum <- initialStationStartDate
-} else {
-  initialStartDateMinimum <- Sys.Date() - lubridate::years(1)
-}
+showNavsetCardTab <- reactiveVal(FALSE)
+showPageBottomText <- reactiveVal(FALSE)
