@@ -248,14 +248,14 @@
     },
     "azmetr": {
       "Package": "azmetr",
-      "Version": "0.4.0",
+      "Version": "0.5.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "uace-azmet",
       "RemoteRepo": "azmetr",
       "RemoteRef": "main",
-      "RemoteSha": "7f9eae36ac8ef144e03d5d1384e71b9f3d7f5272",
+      "RemoteSha": "098080d1a744cd64e4524b37268d16cfd13865ce",
       "Requirements": [
         "R",
         "attempt",
@@ -269,7 +269,7 @@
         "tibble",
         "tidyselect"
       ],
-      "Hash": "6c9a4e47eaf4863db600b0d6d9aff601"
+      "Hash": "91a9adcd5be63ed0ac5477d64c8abfe6"
     },
     "backports": {
       "Package": "backports",
